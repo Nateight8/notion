@@ -6,9 +6,23 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { useConvexAuth } from "convex/react";
+import { redirect } from "next/navigation";
 import { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
+  if (isLoading) {
+    return (
+      <div className="h-full flex items-center justify-center">loading...</div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return redirect("/");
+  }
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
