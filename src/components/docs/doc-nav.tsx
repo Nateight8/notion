@@ -68,6 +68,17 @@ function Navigation({}: Props) {
         <PlusIcon className="w-4 h-4" />
         <FileIcon className="w-4 h-4" /> <span>New page</span>
       </Button>
+
+      {/* {!!params.documentId ? (
+          <Navbar
+            isCollapsed={isCollapsed}
+            onResetWidth={resetWidth}
+          />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className="h-6 w-6 text-muted-foreground" />}
+          </nav>
+        )} */}
     </div>
   );
 }

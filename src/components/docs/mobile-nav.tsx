@@ -16,7 +16,7 @@ import Navigation from "./doc-nav";
 
 export default function MobileNavSheet() {
   return (
-    <div className="px-4 h-14 border-b flex items-center">
+    <div className="px-4 h-14 md:hidden border-b flex items-center">
       <Sheet>
         <SheetTrigger className="md:hidden" asChild>
           <Button variant="outline" size={"icon"}>

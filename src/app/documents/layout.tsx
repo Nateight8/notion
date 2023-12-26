@@ -1,5 +1,6 @@
 "use client";
 import Navigation from "@/components/docs/doc-nav";
+import Header from "@/components/docs/header";
 import MobileNavSheet from "@/components/docs/mobile-nav";
 import SearchCommand from "@/components/docs/search-command";
 import {
@@ -8,12 +9,12 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { useConvexAuth } from "convex/react";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
   const { isAuthenticated, isLoading } = useConvexAuth();
-
+  const params = useParams();
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center">loading...</div>
@@ -32,7 +33,7 @@ export default function Layout({ children }: PropsWithChildren) {
       >
         <ResizablePanel
           maxSize={30}
-          minSize={20}
+          minSize={0}
           className="hidden md:block"
           defaultSize={25}
         >
@@ -43,9 +44,8 @@ export default function Layout({ children }: PropsWithChildren) {
         <ResizableHandle withHandle className="hidden md:block " />
         <ResizablePanel defaultSize={75}>
           <MobileNavSheet />
-          <main className="flex h-full items-center justify-center p-6">
-            {children}
-          </main>
+          {!!params.documentId && <Header />}
+          <main className="h-full p-6">{children}</main>
         </ResizablePanel>
       </ResizablePanelGroup>
       <SearchCommand />
