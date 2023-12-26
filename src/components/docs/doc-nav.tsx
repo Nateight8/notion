@@ -15,12 +15,15 @@ import { api } from "../../../convex/_generated/api";
 import { toast } from "sonner";
 import DocumentItem from "./DocumentItem";
 import DocumentList from "./document-item";
+import TrashCan from "./trash-dialog";
+import { useSearch } from "@/lib/seachContext";
+
 type Props = {};
 
 function Navigation({}: Props) {
   const create = useMutation(api.documents.create);
   const router = useRouter();
-
+  const { isOpen, onClose, onOpen, toggle } = useSearch((store) => store);
   const createNote = () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
       router.push(`/documents/${documentId}`)
@@ -36,10 +39,13 @@ function Navigation({}: Props) {
     <div className="flex items-between pb-4 justify-center flex-col h-screen">
       <div className="h-14 flex items-center justify-end p-4">
         <div className="space-x-2 flex items-center">
+          <TrashCan />
+
           <Button
             size={"icon"}
             variant={"outline"}
             className="h-6 w-6 rounded-full"
+            onClick={() => toggle()}
           >
             <MagnifyingGlassIcon className="w-4 h-4" />
           </Button>
@@ -49,9 +55,10 @@ function Navigation({}: Props) {
       </div>
 
       <div className="flex-1 w-full">
-        <DocumentItem label="Home" />
+        {/* <DocumentItem label="Home" /> */}
         <DocumentList />
       </div>
+
       <Button
         onClick={createNote}
         variant={"ghost"}

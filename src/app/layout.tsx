@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/nav";
 import ConvexClientProvider from "@/components/convex-provider";
 import { Toaster } from "@/components/ui/sonner";
+// import { SearchCommand } from "@/components/docs/search-command";
 // import  ConvexClientProvider  from "@/lib/convex-provider";
 // import { usePathname } from "next/navigation";
 
